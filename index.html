@@ -65,30 +65,15 @@
     text-decoration: none;
     cursor: pointer;
   }
-  .logo-mark {
-    width: 42px;
-    height: 42px;
-    background: var(--red);
-    border-radius: 8px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-  }
-  .logo-mark svg { width: 24px; height: 24px; fill: white; }
-  .logo-text { display: flex; flex-direction: column; line-height: 1.1; }
-  .logo-text .abbr { font-weight: 700; font-size: 20px; color: var(--red); letter-spacing: 0.02em; }
-  .logo-text .full { font-size: 10px; color: var(--gray-500); letter-spacing: 0.04em; text-transform: uppercase; }
 
   .menu-toggle { display: none; background: none; border: none; cursor: pointer; padding: 8px; }
   .menu-toggle svg { width: 26px; height: 26px; stroke: var(--gray-900); stroke-width: 2; fill: none; }
 
   .nav-links { display: flex; align-items: center; gap: 4px; list-style: none; }
   .nav-links > li { position: relative; }
-  .nav-links > li > a,
-  .nav-links > li > button {
+  .nav-links > li > a {
     display: flex;
     align-items: center;
-    gap: 4px;
     padding: 8px 14px;
     font-size: 14px;
     font-weight: 500;
@@ -101,46 +86,11 @@
     transition: all 0.15s;
     font-family: var(--font-body);
   }
-  .nav-links > li > button svg { width: 12px; height: 12px; transition: transform 0.2s; }
-
-  /* Desktop Dropdowns */
-  @media (min-width: 851px) {
-    .nav-links > li:hover > button svg { transform: rotate(180deg); }
-    .nav-links > li:hover .dropdown { opacity: 1; pointer-events: all; transform: translateY(0); }
-    .nav-links > li > a:hover,
-    .nav-links > li > button:hover,
-    .nav-links > li > a.active,
-    .nav-links > li > button.active {
-      color: var(--red);
-      background: var(--red-light);
-    }
-    .dropdown {
-      position: absolute;
-      top: 100%;
-      left: 0;
-      background: var(--white);
-      border: 1px solid var(--gray-100);
-      border-radius: 8px;
-      box-shadow: 0 10px 30px rgba(0,0,0,0.08);
-      min-width: 240px;
-      padding: 6px;
-      opacity: 0;
-      pointer-events: none;
-      transform: translateY(4px);
-      transition: all 0.15s;
-    }
+  .nav-links > li > a:hover,
+  .nav-links > li > a.active {
+    color: var(--red);
+    background: var(--red-light);
   }
-
-  .dropdown a {
-    display: block;
-    padding: 8px 12px;
-    font-size: 13px;
-    color: var(--gray-700);
-    text-decoration: none;
-    border-radius: 6px;
-    cursor: pointer;
-  }
-  .dropdown a:hover { background: var(--warm-gray); color: var(--red); }
 
   /* ─── GENERAL LAYOUT STRUCTS ─── */
   .section-hero {
@@ -240,7 +190,6 @@
   @media (max-width: 850px) {
     .menu-toggle { display: block; }
     .nav-inner { padding: 0 1rem; }
-    .logo-text .full { display: none; }
     
     .nav-links {
       position: fixed; top: 72px; left: 0; width: 100%; height: calc(100vh - 72px);
@@ -250,15 +199,10 @@
     }
     .nav-links.mobile-open { transform: translateX(0); }
     .nav-links > li { width: 100%; }
-    .nav-links > li > button, .nav-links > li > a {
-      width: 100%; padding: 12px; font-size: 16px; justify-content: space-between;
+    .nav-links > li > a {
+      width: 100%; padding: 12px; font-size: 16px;
       border-bottom: 1px solid var(--gray-100); border-radius: 0;
     }
-    
-    .dropdown { display: none; background: var(--off-white); padding: 0.5rem; border-radius: 6px; width: 100%; }
-    .nav-links > li.submenu-active .dropdown { display: block; }
-    .nav-links > li.submenu-active > button svg { transform: rotate(180deg); }
-    .dropdown a { padding: 10px; font-size: 15px; }
 
     .hero-home-inner, .grid-2, .grid-3, .grid-4 { grid-template-columns: 1fr; gap: 2rem; }
     .content-container { padding: 2rem 1rem; }
@@ -272,61 +216,31 @@
   <div class="nav-inner">
     
     <div class="logo" onclick="showPage('home')">
-        <img src="ShelfLine.jpg" alt="Shelfline" height="40" style="width: auto; vertical-align: middle;">
-</div>
+      <img src="ShelfLine.jpg" alt="Shelfline" height="40" style="width: auto; vertical-align: middle;">
+    </div>
     
     <button class="menu-toggle" aria-label="Toggle Menu" onclick="toggleMobileMenu()">
       <svg viewBox="0 0 24 24" id="menu-icon"><path d="M4 6h16M4 12h16M4 18h16" stroke-linecap="round"/></svg>
     </button>
 
     <ul class="nav-links" id="navLinks">
-      <li>
-        <button onclick="handleNavClick(this, 'home')" id="nav-home" class="active">Home
-          <svg viewBox="0 0 12 12"><path d="M2 4l4 4 4-4" fill="none" stroke="currentColor" stroke-width="1.5"/></svg>
-        </button>
-        <div class="dropdown">
-          <a onclick="closeMobileMenu(); showPage('home')">Latest Infrastructure News</a>
-          <a onclick="closeMobileMenu(); showPage('home')">Association Announcements</a>
-        </div>
-      </li>
-      <li>
-        <button onclick="handleNavClick(this, 'about')" id="nav-about">About Us
-          <svg viewBox="0 0 12 12"><path d="M2 4l4 4 4-4" fill="none" stroke="currentColor" stroke-width="1.5"/></svg>
-        </button>
-        <div class="dropdown">
-          <a onclick="closeMobileMenu(); showPage('about')">Welcome Note</a>
-          <a onclick="closeMobileMenu(); showPage('about')">History &amp; Vision</a>
-          <a onclick="closeMobileMenu(); showPage('about')">Standard Trading Conditions</a>
-        </div>
-      </li>
-      <li>
-        <button onclick="handleNavClick(this, 'members')" id="nav-members">Members
-          <svg viewBox="0 0 12 12"><path d="M2 4l4 4 4-4" fill="none" stroke="currentColor" stroke-width="1.5"/></svg>
-        </button>
-        <div class="dropdown">
-          <a onclick="closeMobileMenu(); showPage('members')">Corporate Directory Logo Listing</a>
-          <a onclick="closeMobileMenu(); showPage('members')">Membership Categories</a>
-        </div>
-      </li>
-      <li>
-        <button onclick="handleNavClick(this, 'services')" id="nav-services">Services
-          <svg viewBox="0 0 12 12"><path d="M2 4l4 4 4-4" fill="none" stroke="currentColor" stroke-width="1.5"/></svg>
-        </button>
-        <div class="dropdown">
-          <a onclick="closeMobileMenu(); showPage('services')">Neutral Airway Bills (AWB)</a>
-          <a onclick="closeMobileMenu(); showPage('services')">Bar Code Systems &amp; Permits</a>
-        </div>
-      </li>
-      <li>
-        <button onclick="handleNavClick(this, 'training')" id="nav-training">Training
-          <svg viewBox="0 0 12 12"><path d="M2 4l4 4 4-4" fill="none" stroke="currentColor" stroke-width="1.5"/></svg>
-        </button>
-        <div class="dropdown">
-          <a onclick="closeMobileMenu(); showPage('training')">Course Programme Calendar</a>
-          <a onclick="closeMobileMenu(); showPage('training')">CBTA Updates &amp; Regulations</a>
-        </div>
-      </li>
+      <li><a onclick="closeMobileMenu(); showPage('home')" id="nav-home" class="active">Home</a></li>
+      <li><a onclick="closeMobileMenu(); showPage('about')" id="nav-about">About Us</a></li>
+      
+      <!--
+      <li><a onclick="closeMobileMenu(); showPage('members')" id="nav-members">Members</a></li>
+      -->
+      
+      <li><a onclick="closeMobileMenu(); showPage('Installation')" id="nav-installation">Installation</a></li>
+      
+      <!--
+      <li><a onclick="closeMobileMenu(); showPage('training')" id="nav-training">Training</a></li>
+      -->
+      
+      <!--
       <li><a onclick="closeMobileMenu(); showPage('publications')" id="nav-publications">Publications</a></li>
+      -->
+      
       <li><a onclick="closeMobileMenu(); showPage('contact')" id="nav-contact">Contact</a></li>
     </ul>
   </div>
@@ -344,7 +258,7 @@
       </div>
       <div class="stats-grid">
         <div class="stat-box"><span class="num">2026</span><span class="lbl">Founded Year</span></div>
-        <div class="stat-box"><span class="num">10+</span><span class="lbl">supported industries</span></div>
+        <div class="stat-box"><span class="num">10+</span><span class="lbl">Supported Industries</span></div>
       </div>
     </div>
   </div>
@@ -360,26 +274,24 @@
     <div class="grid-2">
       <div>
         <h2 style="margin-bottom:1rem;">Our Mission &amp; Purpose</h2>
-        <p style="margin-bottom:1rem;">At ShelfLine, we believe inventory management should be simple, fast, and reliable. Built for modern businesses, ShelfLine helps teams track stock levels, manage inventory movement, and perform accurate stock taking, all from one streamlined platform.
-        </div>
-
-Whether you run a retail store, warehouse, small business, or growing enterprise, ShelfLine gives you the tools to stay organized and make smarter decisions with confidence. No more messy spreadsheets, missing stock, or time-consuming manual counts.</p>
+        <p style="margin-bottom:1rem;">At ShelfLine, we believe inventory management should be simple, fast, and reliable. Built for modern businesses, ShelfLine helps teams track stock levels, manage inventory movement, and perform accurate stock taking, all from one streamlined platform.</p>
+        <p>Whether you run a retail store, warehouse, small business, or growing enterprise, ShelfLine gives you the tools to stay organized and make smarter decisions with confidence. No more messy spreadsheets, missing stock, or time-consuming manual counts.</p>
       </div>
       <div class="card">
         <h3>Setup and installation guide</h3>
-        <p style="font-size:14px; color:var(--gray-700); margin-bottom:1rem;">Set up and start using shelfline in as little as 5 minutes!</p>
+        <p style="font-size:14px; color:var(--gray-700); margin-bottom:1rem;">Set up and start using ShelfLine in as little as 5 minutes!</p>
         <a 
-        href="https://tinyurl.com/jongorbital"
-        target="_blank"
-        style="color:var(--red); font-weight:600; text-decoration:none; font-size:14px; cursor:pointer;">
-  Download ShelfLine APK for android &rarr;
-</a>
+          href="https://tinyurl.com/jongorbital"
+          target="_blank"
+          style="color:var(--red); font-weight:600; text-decoration:none; font-size:14px; cursor:pointer;">
+          Download ShelfLine APK for Android &rarr;
+        </a>
       </div>
     </div>
   </div>
 </div>
 
-<!-- ─── PAGE 3: MEMBERS PAGE ─── -->
+<!-- ─── PAGE 3: MEMBERS PAGE ─── 
 <div id="page-members" class="page">
   <div class="section-hero">
     <h1>Member <em>Directory</em></h1>
@@ -409,25 +321,28 @@ Whether you run a retail store, warehouse, small business, or growing enterprise
   </div>
 </div>
 
+-->
+
 <!-- ─── PAGE 4: SERVICES PAGE ─── -->
-<div id="page-services" class="page">
+<div id="page-Installation" class="page">
   <div class="section-hero">
-    <h1>Cargo <em>Services</em> &amp; Operations</h1>
-    <p>Supplying systemic resources, standardized digital documentation systems, and validation tools to operational agents.</p>
+    <h1>Installing <em>ShelfLine</em> &amp; Setup</h1>
+    <p>quick 5 minute setup guide</p>
   </div>
   <div class="content-container">
     <div class="grid-3">
-      <div class="card">
-        <h3>Neutral Airway Bills</h3>
-        <p style="color:var(--gray-700); font-size:14px;">Distribution network for authorized Master and House Airway Bills built to full international aviation safety compliances.</p>
       </div>
       <div class="card">
-        <h3>System Barcoding</h3>
-        <p style="color:var(--gray-700); font-size:14px;">High-resolution label issuance resources mapping perfectly with Changi Airport terminal automation cargo scanning belts.</p>
+        <h3>Setting up database</h3>
+        <p style="color:var(--gray-700); font-size:14px;">Runs on linux.</p>
       </div>
       <div class="card">
-        <h3>Certificates of Origin</h3>
-        <p style="color:var(--gray-700); font-size:14px;">Administrative processing portal framework validation access supporting fast clearance with Singapore Customs authorities.</p>
+        <h3>Setting up machines to access database</h3>
+        <p style="color:var(--gray-700); font-size:14px;">Download Dbeaver here.</p>
+      </div>
+      <div class="card">
+        <h3>Setting up android device</h3>
+        <p style="color:var(--gray-700); font-size:14px;">Download APK here.</p>
       </div>
     </div>
   </div>
@@ -437,7 +352,7 @@ Whether you run a retail store, warehouse, small business, or growing enterprise
 <div id="page-training" class="page">
   <div class="section-hero">
     <h1>Training <em>Academy</em> &amp; CBTA</h1>
-    <p>Equicking aviation and logistics professionals with crucial safety certifications and continuous upskilling.</p>
+    <p>Equipping aviation and logistics professionals with crucial safety certifications and continuous upskilling.</p>
   </div>
   <div class="content-container">
     <div class="grid-2" style="margin-bottom:3rem;">
@@ -454,7 +369,7 @@ Whether you run a retail store, warehouse, small business, or growing enterprise
   </div>
 </div>
 
-<!-- ─── PAGE 6: PUBLICATIONS PAGE ─── -->
+<!-- ─── PAGE 6: PUBLICATIONS PAGE ─── 
 <div id="page-publications" class="page">
   <div class="section-hero">
     <h1>Industry <em>Publications</em></h1>
@@ -482,53 +397,28 @@ Whether you run a retail store, warehouse, small business, or growing enterprise
   </div>
 </div>
 
+-->
+
 <!-- ─── PAGE 7: CONTACT PAGE ─── -->
 <div id="page-contact" class="page">
   <div class="section-hero">
-    <h1>Contact <em>SAAA</em></h1>
-    <p>Get in touch with the Singapore Aircargo Agents Association Secretariat Office.</p>
+    <h1>Contact <em>Us</em></h1>
+    <p>Get in touch with the ShelfLine team.</p>
   </div>
   <div class="content-container">
     <div class="grid-2">
-      <!-- Address Box 1 -->
+      <!-- Contact Card -->
       <div class="card">
-        <h3 style="margin-bottom: 1.5rem;">SAAA PERMIT & CERTIFICATE OF ORIGIN</h3>
-        
-        <!-- Address Row -->
-        <div class="contact-detail-row">
-          <div class="contact-icon-wrap">
-            <svg viewBox="0 0 24 24"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z" stroke-linecap="round" stroke-linejoin="round"/><circle cx="12" cy="10" r="3" stroke-linecap="round" stroke-linejoin="round"/></svg>
-          </div>
-          <div class="contact-text-wrap">
-            <h4>Address</h4>
-            <p>
-              <strong>Singapore Aircargo Agents Association</strong><br>
-              105 Airport Cargo Road #01-107<br>
-              SATS Airfreight Terminal 3, Core H<br>
-              Singapore 819462
-            </p>
-          </div>
-        </div>
+        <h3 style="margin-bottom: 1.5rem;">Get In Touch</h3>
 
-        <!-- Phone Row -->
+        <!-- Name Row -->
         <div class="contact-detail-row">
           <div class="contact-icon-wrap">
-            <svg viewBox="0 0 24 24"><path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07 19.5 19.5 0 01-6-6 19.79 19.79 0 01-3.07-8.67A2 2 0 015.06 3h3a2 2 0 012 1.72 12.84 12.84 0 00.7 2.81 2 2 0 01-.45 2.11L9.03 10.5a16 16 0 006.5 6.5l1.22-1.22a2 2 0 012.11-.45 12.84 12.84 0 002.81.7A2 2 0 0122 16.92z" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            <svg viewBox="0 0 24 24"><path d="M20 21v-2a4 4 0 00-4-4H8a4 4 0 00-4 4v2" stroke-linecap="round" stroke-linejoin="round"/><circle cx="12" cy="7" r="4" stroke-linecap="round" stroke-linejoin="round"/></svg>
           </div>
           <div class="contact-text-wrap">
-            <h4>Telephone</h4>
-            <p><a href="tel:+6565459597">+65 6545 9597</a>
-          </div>
-        </div>
-
-        <!-- Fax Row -->
-        <div class="contact-detail-row">
-          <div class="contact-icon-wrap">
-            <svg viewBox="0 0 24 24"><path d="M17 17h2a2 2 0 002-2v-4a2 2 0 00-2-2H5a2 2 0 00-2 2v4a2 2 0 002 2h2m2 4h6a2 2 0 002-2v-4a2 2 0 00-2-2H9a2 2 0 00-2 2v4a2 2 0 002 2zm8-12V5a2 2 0 00-2-2H9a2 2 0 00-2 2v4" stroke-linecap="round" stroke-linejoin="round"/></svg>
-          </div>
-          <div class="contact-text-wrap">
-            <h4>Fax</h4>
-            <p>+65 6543 0147</p>
+            <h4>Contact Person</h4>
+            <p>Justin Ong</p>
           </div>
         </div>
 
@@ -539,65 +429,23 @@ Whether you run a retail store, warehouse, small business, or growing enterprise
           </div>
           <div class="contact-text-wrap">
             <h4>Email</h4>
-            <p><a href="mailto:scs@saaa.org.sg">scs@saaa.org.sg</a></p>
+            <p><a href="mailto:ongjunyin@gmail.com">ongjunyin@gmail.com</a></p>
           </div>
         </div>
       </div>
-
-      <!-- Address Box 2 (Duplicate 1) -->
+      
+      <!-- Contact Card -->
       <div class="card">
-        <h3 style="margin-bottom: 1.5rem;">SAAA Cargo Services Pte Ltd</h3>
-        
-        <!-- Address Row -->
-        <div class="contact-detail-row">
-          <div class="contact-icon-wrap">
-            <svg viewBox="0 0 24 24"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z" stroke-linecap="round" stroke-linejoin="round"/><circle cx="12" cy="10" r="3" stroke-linecap="round" stroke-linejoin="round"/></svg>
-          </div>
-          <div class="contact-text-wrap">
-            <h4>Address</h4>
-            <p>
-              <strong>SAAA Cargo Services Pte Ltd</strong><br>
-              7 Airline Road, #04-06, Cargo Agents Building E,<br>
-              Changi Airfreight Centre,<br>
-              Singapore 819834.
-            </p>
-          </div>
-        </div>
-        
-        <!-- Mailing Address Row -->
-        <div class="contact-detail-row">
-          <div class="contact-icon-wrap">
-            <svg viewBox="0 0 24 24"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z" stroke-linecap="round" stroke-linejoin="round"/><circle cx="12" cy="10" r="3" stroke-linecap="round" stroke-linejoin="round"/></svg>
-          </div>
-          <div class="contact-text-wrap">
-            <h4>Mailing Address</h4>
-            <p>
-              <strong>SAAA Cargo Services Pte Ltd</strong><br>
-              Box 614 Airmail Transit Centre,<br>
-              Singapore 918104.
-            </p>
-          </div>
-        </div>
+        <h3 style="margin-bottom: 1.5rem;">Get In Touch</h3>
 
-        <!-- Phone Row -->
+        <!-- Name Row -->
         <div class="contact-detail-row">
           <div class="contact-icon-wrap">
-            <svg viewBox="0 0 24 24"><path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07 19.5 19.5 0 01-6-6 19.79 19.79 0 01-3.07-8.67A2 2 0 015.06 3h3a2 2 0 012 1.72 12.84 12.84 0 00.7 2.81 2 2 0 01-.45 2.11L9.03 10.5a16 16 0 006.5 6.5l1.22-1.22a2 2 0 012.11-.45 12.84 12.84 0 002.81.7A2 2 0 0122 16.92z" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            <svg viewBox="0 0 24 24"><path d="M20 21v-2a4 4 0 00-4-4H8a4 4 0 00-4 4v2" stroke-linecap="round" stroke-linejoin="round"/><circle cx="12" cy="7" r="4" stroke-linecap="round" stroke-linejoin="round"/></svg>
           </div>
           <div class="contact-text-wrap">
-            <h4>Telephone</h4>
-            <p><a href="tel:+6565455006">+65 6545 5006</a>
-          </div>
-        </div>
-
-        <!-- Fax Row -->
-        <div class="contact-detail-row">
-          <div class="contact-icon-wrap">
-            <svg viewBox="0 0 24 24"><path d="M17 17h2a2 2 0 002-2v-4a2 2 0 00-2-2H5a2 2 0 00-2 2v4a2 2 0 002 2h2m2 4h6a2 2 0 002-2v-4a2 2 0 00-2-2H9a2 2 0 00-2 2v4a2 2 0 002 2zm8-12V5a2 2 0 00-2-2H9a2 2 0 00-2 2v4" stroke-linecap="round" stroke-linejoin="round"/></svg>
-          </div>
-          <div class="contact-text-wrap">
-            <h4>Fax</h4>
-            <p>+65 6542 6820</p>
+            <h4>Contact Person</h4>
+            <p>Justin Ong</p>
           </div>
         </div>
 
@@ -608,110 +456,30 @@ Whether you run a retail store, warehouse, small business, or growing enterprise
           </div>
           <div class="contact-text-wrap">
             <h4>Email</h4>
-            <p><a href="mailto:admin@saaa.org.sg">admin@saaa.org.sg</a></p>
-          </div>
-        </div>
-      </div>
-
-      <!-- Address Box 3 (Duplicate 2) -->
-      <div class="card">
-        <h3 style="margin-bottom: 1.5rem;">Association Secretariat Address</h3>
-        
-        <!-- Address Row -->
-        <div class="contact-detail-row">
-          <div class="contact-icon-wrap">
-            <svg viewBox="0 0 24 24"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z" stroke-linecap="round" stroke-linejoin="round"/><circle cx="12" cy="10" r="3" stroke-linecap="round" stroke-linejoin="round"/></svg>
-          </div>
-          <div class="contact-text-wrap">
-            <h4>Address</h4>
-            <p>
-              <strong>SAAA@Singapore</strong><br>
-              7 Airline Road, #04-06, Cargo Agents Building E,<br>
-              Changi Airfreight Centre,<br>
-              Singapore 819834.
-            </p>
-          </div>
-        </div>
-        
-        <!-- Mailing Address Row -->
-        <div class="contact-detail-row">
-          <div class="contact-icon-wrap">
-            <svg viewBox="0 0 24 24"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z" stroke-linecap="round" stroke-linejoin="round"/><circle cx="12" cy="10" r="3" stroke-linecap="round" stroke-linejoin="round"/></svg>
-          </div>
-          <div class="contact-text-wrap">
-            <h4>Address</h4>
-            <p>
-              <strong>SAAA@Singapore</strong><br>
-              Box 558 Airmail Transit Centre, <br>
-              Singapore 918102.
-            </p>
-          </div>
-        </div>
-
-        <!-- Phone Row -->
-        <div class="contact-detail-row">
-          <div class="contact-icon-wrap">
-            <svg viewBox="0 0 24 24"><path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07 19.5 19.5 0 01-6-6 19.79 19.79 0 01-3.07-8.67A2 2 0 015.06 3h3a2 2 0 012 1.72 12.84 12.84 0 00.7 2.81 2 2 0 01-.45 2.11L9.03 10.5a16 16 0 006.5 6.5l1.22-1.22a2 2 0 012.11-.45 12.84 12.84 0 002.81.7A2 2 0 0122 16.92z" stroke-linecap="round" stroke-linejoin="round"/></svg>
-          </div>
-          <div class="contact-text-wrap">
-            <h4>Telephone</h4>
-            <p><a href="tel:+6565454620">+65 6545 4620</a>
-          </div>
-        </div>
-
-        <!-- Fax Row -->
-        <div class="contact-detail-row">
-          <div class="contact-icon-wrap">
-            <svg viewBox="0 0 24 24"><path d="M17 17h2a2 2 0 002-2v-4a2 2 0 00-2-2H5a2 2 0 00-2 2v4a2 2 0 002 2h2m2 4h6a2 2 0 002-2v-4a2 2 0 00-2-2H9a2 2 0 00-2 2v4a2 2 0 002 2zm8-12V5a2 2 0 00-2-2H9a2 2 0 00-2 2v4" stroke-linecap="round" stroke-linejoin="round"/></svg>
-          </div>
-          <div class="contact-text-wrap">
-            <h4>Fax</h4>
-            <p>+65 6542 6820</p>
-          </div>
-        </div>
-
-        <!-- Email Row -->
-        <div class="contact-detail-row">
-          <div class="contact-icon-wrap">
-            <svg viewBox="0 0 24 24"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z" stroke-linecap="round" stroke-linejoin="round"/><path d="M22 6l-10 7L2 6" stroke-linecap="round" stroke-linejoin="round"/></svg>
-          </div>
-          <div class="contact-text-wrap">
-            <h4>Email</h4>
-            <p><a href="mailto:saaasin@saaa.org.sg">saaasin@saaa.org.sg</a></p>
+            <p><a href="mailto:ongjunyin@gmail.com">ongjunyin@gmail.com</a></p>
           </div>
         </div>
       </div>
 
       <!-- Google Maps Embed Box -->
       <div class="card map-container">
-        <iframe 
-          loading="lazy" 
-          allowfullscreen 
-          src="https://maps.google.com/maps?q=7%20Changi%20Cargo%20Complex%20Changi%20Coast%20Road,%20Singapore&t=&z=15&ie=UTF8&iwloc=&output=embed"
-          title="Singapore Aircargo Agents Association Location">
-        </iframe>
+          <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3988.7950886854196!2d103.77411667496568!3d1.2976492986900332!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x31da1a56784202d9%3A0x488d08d6c1f88d6b!2sNational%20University%20of%20Singapore!5e0!3m2!1sen!2ssg!4v1779204247238!5m2!1sen!2ssg" width="600" height="450" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
       </div>
     </div>
   </div>
 </div>
 
-<!-- JAVASCRIPT APP MATRIX ROUTER -->
+<!-- JAVASCRIPT APP ROUTER -->
 <script>
   function showPage(pageId) {
-    const pages = document.querySelectorAll('.page');
-    pages.forEach(p => p.classList.remove('active'));
-    
+    document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
     const targetPage = document.getElementById('page-' + pageId);
-    if(targetPage) targetPage.classList.add('active');
+    if (targetPage) targetPage.classList.add('active');
 
-    const activeClass = 'active';
-    document.querySelectorAll('.nav-links button, .nav-links a').forEach(btn => {
-      btn.classList.remove(activeClass);
-    });
-    
-    const currentBtn = document.getElementById('nav-' + pageId);
-    if(currentBtn) currentBtn.classList.add(activeClass);
-    
+    document.querySelectorAll('.nav-links a').forEach(a => a.classList.remove('active'));
+    const currentLink = document.getElementById('nav-' + pageId);
+    if (currentLink) currentLink.classList.add('active');
+
     window.scrollTo({ top: 0, behavior: 'instant' });
   }
 
@@ -719,8 +487,7 @@ Whether you run a retail store, warehouse, small business, or growing enterprise
     const navLinks = document.getElementById('navLinks');
     const menuIcon = document.getElementById('menu-icon');
     navLinks.classList.toggle('mobile-open');
-    
-    if(navLinks.classList.contains('mobile-open')) {
+    if (navLinks.classList.contains('mobile-open')) {
       menuIcon.innerHTML = '<path d="M18 6L6 18M6 6l12 12" stroke-linecap="round"/>';
     } else {
       menuIcon.innerHTML = '<path d="M4 6h16M4 12h16M4 18h16" stroke-linecap="round"/>';
@@ -732,27 +499,7 @@ Whether you run a retail store, warehouse, small business, or growing enterprise
     const menuIcon = document.getElementById('menu-icon');
     navLinks.classList.remove('mobile-open');
     menuIcon.innerHTML = '<path d="M4 6h16M4 12h16M4 18h16" stroke-linecap="round"/>';
-    document.querySelectorAll('.nav-links > li').forEach(li => li.classList.remove('submenu-active'));
-  }
-
-  function handleNavClick(element, pageId) {
-    if (window.innerWidth <= 850) {
-      const parentLi = element.parentElement;
-      const alreadyOpen = parentLi.classList.contains('submenu-active');
-      
-      document.querySelectorAll('.nav-links > li').forEach(li => li.classList.remove('submenu-active'));
-      
-      if (!alreadyOpen) {
-        parentLi.classList.add('submenu-active');
-      } else {
-        closeMobileMenu();
-        showPage(pageId);
-      }
-    } else {
-      showPage(pageId);
-    }
   }
 </script>
 </body>
-  
 </html>
